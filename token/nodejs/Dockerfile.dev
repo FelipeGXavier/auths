@@ -1,0 +1,9 @@
+FROM node:latest 
+
+COPY . /app
+
+WORKDIR /app
+
+RUN npm cache clear --force && npm install
+
+ENTRYPOINT [ "npm", "run", "start" ]

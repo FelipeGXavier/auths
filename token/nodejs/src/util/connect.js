@@ -1,0 +1,3 @@
+const { development } = require("../../knexfile");
+const knexFile = require("../../knexfile");
+module.exports = require("knex")(knexFile[development]);
