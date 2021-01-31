@@ -26,7 +26,7 @@ const signIn = async (req, res) => {
 };
 
 const guard = (req, res) => {
-  return res.send("Protected Route");
+  return res.json(req.user);
 };
 
 async function User(email, password) {

@@ -24,7 +24,20 @@ const decodeToken = (token) => {
   });
 };
 
-const middleware = (req, res, next) => {};
+const middleware = async (req, res, next) => {
+  const authHeader = req.header("Authorization");
+  if (authHeader && authHeader.includes("Bearer")) {
+    const token = authHeader.substr(7);
+    try {
+      const decoded = await decodeToken(token);
+      req.user = decoded;
+      return next();
+    } catch (err) {
+      return res.sendStatus(403);
+    }
+  }
+  return res.sendStatus(403);
+};
 
 module.exports = {
   decodeToken,
