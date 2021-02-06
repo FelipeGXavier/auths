@@ -14,16 +14,21 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @Configuration
 public class AuthConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Autowired
-    private InMemoryDatabase inMemoryDatabase;
+    @Autowired private InMemoryDatabase inMemoryDatabase;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ApiKeyFilter apiKeyFilter = new ApiKeyFilter();
         apiKeyFilter.setAuthenticationManager(new ApiKeyAuthManager(inMemoryDatabase));
         http.authorizeRequests()
-                .antMatchers("/api/src/*")
+                .antMatchers(
+                        "/v2/api-docs",
+                        "/api/datasource/*",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
