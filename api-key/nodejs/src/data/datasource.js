@@ -1,11 +1,11 @@
 class Datasource {
-    
+
   constructor() {
     this.collections = [];
   }
 
   has(key) {
-    return Object.entries(this.collections).includes(key);
+    return this.collections[key] != null;
   }
 
   get(key) {
