@@ -1,10 +1,9 @@
 const Redis = require('./src/redis');
 const app = require('./src/config');
+const bcrypt = require('bcrypt');
 
-Redis.set('teste', JSON.stringify({message: 'Teste'}));
-
-app.get('/ping', (req, res) => {
-    Redis.get('teste').then(result => res.send(result));
+bcrypt.hash('teste', 10, function(err, hash) {
+    Redis.set('felipe@teste.com', hash);    
 });
 
 app.listen(3000);
