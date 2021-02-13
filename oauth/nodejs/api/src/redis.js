@@ -14,6 +14,14 @@ class Redis {
         })
     }
 
+    static setWithExpire(key, value, time) {
+        client.setex(key, time, value, redis.print);
+    }
+
+    static remove(key) {
+        client.del(key);
+    }
+
     static set(key, value) {
         client.set(key, value, redis.print);
     }

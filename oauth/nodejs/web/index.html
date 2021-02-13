@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <title>Document</title>
 </head>
 
@@ -13,7 +14,8 @@
         margin: 0 auto;
         padding: 1rem;
         display: flex;
-        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     input {
@@ -36,6 +38,19 @@
         </form>
     </div>
 </body>
+<script>
+
+
+    function init() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init({
+                client_id: '${CLIENT_ID}', 
+                scope: 'https://www.googleapis.com/auth/calendar'
+        });
+    });
+    
+}
+</script>
 <script type="module" src="./dashboard.js"></script>
 <script src="./main.js"></script>
 </html>
